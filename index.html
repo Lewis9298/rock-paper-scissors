@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const choices = ["rock", "paper", "scissors"];
+      let humanscore = 0;
+      let computerscore = 0;
+
+      function getcomputerchoice() {
+        let random = Math.floor(Math.random() * choices.length);
+        return choices[random];
+      }
+
+      function gethumanchoice() {
+        let humanchoice;
+        do {
+          humanchoice = prompt(
+            "Enter your choice. Rock, Paper, Scissors"
+          ).toLowerCase();
+        } while (!["rock", "paper", "scissors"].includes(humanchoice));
+        return humanchoice;
+      }
+
+      function playround(humanchoice, computerchoice) {
+        console.log(
+          `You chose: ${humanchoice}, Computer chose: ${computerchoice}`
+        );
+        if (
+          (humanchoice === "rock" && computerchoice === "scissors") ||
+          (humanchoice === "paper" && computerchoice === "rock") ||
+          (humanchoice === "scissors" && computerchoice === "paper")
+        ) {
+          humanscore++;
+          console.log("You Win This Round!");
+        } else if (humanchoice === computerchoice) {
+          console.log("It's a Draw!");
+        } else {
+          computerscore++;
+          console.log("You Lose This Round!");
+        }
+        console.log(`Score: You - ${humanscore}, Computer - ${computerscore}`);
+      }
+
+      function playgame() {
+        let round = 0;
+        do {
+          round++;
+          const humanchoice = gethumanchoice();
+          const computerchoice = getcomputerchoice();
+          playround(humanchoice, computerchoice);
+        } while (round < 5);
+        if (humanscore > computerscore) {
+          console.log("You Win The Game");
+        } else if (humanscore === computerscore) {
+          console.log("This Game Is A Draw");
+        } else {
+          console.log("You Lose The Game");
+        }
+      }
+
+      playgame();
+    </script>
+  </body>
+</html>
